@@ -1,10 +1,10 @@
 import AuthLayouts from "../components/layouts/AuthLayouts";
-import FormRegister from "../components/organisms/FormRegister";
+import FormLogin from "../components/organisms/FormLogin";
 
 const Login = () => {
   return (
-    <AuthLayouts title="Lengkapi data untuk membuat akun" type="register">
-      <FormRegister />
+    <AuthLayouts title="Masuk atau buat akun untuk memulai" type="login">
+      <FormLogin />
     </AuthLayouts>
   );
 };

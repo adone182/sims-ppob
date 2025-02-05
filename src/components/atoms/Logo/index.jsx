@@ -3,7 +3,7 @@ const Logo = ({
   altImg = "Logo",
   className = "",
 }) => {
-  return <img src={imageSrc} alt={altImg} className={`h-8 ${className}`} />;
+  return <img src={imageSrc} alt={altImg} className={`${className}`} />;
 };
 
 export default Logo;
