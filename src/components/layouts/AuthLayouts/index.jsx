@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import bgImage from "../../../assets/bg-login.png";
+import imageLogo from "../../../assets/logo.png";
 import { NavbarBrand } from "../../molecules/NavbarBrand";
 import { Image } from "../../atoms/Image";
 
@@ -9,7 +10,7 @@ export const AuthLayouts = ({ type, title, children }) => {
       <div className="w-full md:w-1/2 flex justify-center items-center p-0">
         <div className="w-full max-w-xs">
           <div className="flex flex-col items-center text-center">
-            <NavbarBrand imageSrc="/src/assets/logo.png" altImg="Logo" />
+            <NavbarBrand imageSrc={imageLogo} altImg="SIMS PPOB" />
             <h1 className="text-gray-700 text-xl px-8 font-semibold mb-8 mt-2">
               {title}
             </h1>
