@@ -1,4 +1,4 @@
-const Button = ({
+export const Button = ({
   type = "button",
   title = "",
   classname = "",
@@ -18,5 +18,3 @@ const Button = ({
     </button>
   );
 };
-
-export default Button;

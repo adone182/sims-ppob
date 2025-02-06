@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { InputForm } from "../../molecules/FormInput";
+import { AtSign, LockKeyhole, User } from "lucide-react";
+import { Button } from "../../atoms/Button";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import InputForm from "../../molecules/FormInput";
-import { AtSign, LockKeyhole, User } from "lucide-react";
-import Button from "../../atoms/Button";
-
-const FormRegister = () => {
+export const FormRegister = () => {
   const [formData, setFormData] = useState({
     email: "",
     first_name: "",
@@ -66,7 +65,7 @@ const FormRegister = () => {
       <InputForm
         name="email"
         type="email"
-        placeholder="Masukkan email Anda"
+        placeholder="masukkan email anda"
         icon={<AtSign size={20} />}
         onChange={handleChange}
         value={formData.email}
@@ -74,7 +73,7 @@ const FormRegister = () => {
       <InputForm
         name="first_name"
         type="text"
-        placeholder="Nama depan"
+        placeholder="nama depan"
         icon={<User size={20} />}
         onChange={handleChange}
         value={formData.first_name}
@@ -82,7 +81,7 @@ const FormRegister = () => {
       <InputForm
         name="last_name"
         type="text"
-        placeholder="Nama belakang"
+        placeholder="naama belakang"
         icon={<User size={20} />}
         onChange={handleChange}
         value={formData.last_name}
@@ -90,7 +89,7 @@ const FormRegister = () => {
       <InputForm
         name="password"
         type="password"
-        placeholder="Buat password"
+        placeholder="buat password"
         icon={<LockKeyhole size={20} />}
         onChange={handleChange}
         value={formData.password}
@@ -98,7 +97,7 @@ const FormRegister = () => {
       <InputForm
         name="confirm_password"
         type="password"
-        placeholder="Konfirmasi password"
+        placeholder="konfirmasi password"
         icon={<LockKeyhole size={20} />}
         onChange={handleChange}
         value={formData.confirm_password}
@@ -116,5 +115,3 @@ const FormRegister = () => {
     </form>
   );
 };
-
-export default FormRegister;

@@ -1,23 +1,53 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/home";
-import Login from "./pages/login";
-import Register from "./pages/register";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { Home } from "./pages/home";
+import { Login } from "./pages/login";
+import { Register } from "./pages/register";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Account from "./pages/account";
-import TopUp from "./pages/topUp";
+import { Account } from "./pages/account";
+import { TopUp } from "./pages/topUp";
+import { Transaction } from "./pages/transaction";
+import { Service } from "./pages/service";
+import { useSelector } from "react-redux";
+import { getIsAuthenticated } from "./features/auth/authSlice";
+import { NotFound } from "./pages/notFound";
 
 function App() {
+  const isAunthenticated = useSelector(getIsAuthenticated);
   return (
     <Router>
-      <ToastContainer position="top-right" autoClose={3000} />
+      <ToastContainer position="top-right" autoClose={2000} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route
+          path="/"
+          element={isAunthenticated ? <Home /> : <Navigate to="/login" />}
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/topup" element={<TopUp />} />
-        <Route path="/trancation" element={<h1>Transaction</h1>} />
-        <Route path="/account" element={<Account />} />
+        <Route
+          path="/topup"
+          element={isAunthenticated ? <TopUp /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/service/:serviceCode"
+          element={isAunthenticated ? <Service /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/transaction"
+          element={
+            isAunthenticated ? <Transaction /> : <Navigate to="/login" />
+          }
+        />
+        <Route
+          path="/account"
+          element={isAunthenticated ? <Account /> : <Navigate to="/login" />}
+        />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

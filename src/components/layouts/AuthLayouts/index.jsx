@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import Logo from "../../atoms/Logo";
-import NavbarBrand from "../../molecules/NavbarBrand";
+import bgImage from "../../../assets/bg-login.png";
+import { NavbarBrand } from "../../molecules/NavbarBrand";
+import { Image } from "../../atoms/Image";
 
-const AuthLayouts = ({ type, title, children }) => {
+export const AuthLayouts = ({ type, title, children }) => {
   return (
     <div className="flex flex-col md:flex-row min-h-screen">
-      {/* Bagian Kiri (Form) */}
       <div className="w-full md:w-1/2 flex justify-center items-center p-0">
         <div className="w-full max-w-xs">
           <div className="flex flex-col items-center text-center">
@@ -37,16 +37,13 @@ const AuthLayouts = ({ type, title, children }) => {
         </div>
       </div>
 
-      {/* Bagian Kanan (Gambar Full Lebar & Tinggi) */}
       <div className="hidden md:block w-full md:w-1/2 h-screen">
-        <img
-          src="/src/assets/bg-login.png"
-          alt="Auth Illustration"
+        <Image
+          imageSrc={bgImage}
+          altImg="Auth Background"
           className="w-full h-full object-fill"
         />
       </div>
     </div>
   );
 };
-
-export default AuthLayouts;

@@ -1,11 +1,27 @@
-const baseUrl = import.meta.env.ViTE_API_BASE_URL;
+import { store } from "../store/store";
 
-export const fetchData = async (endpoint) => {
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
+
+export const fetchSaldo = async () => {
+  const token = store.getState().auth.token;
+
   try {
-    const response = await fetch(`${baseUrl}/${endpoint}`);
+    const response = await fetch(`${baseUrl}/balance`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
     const data = await response.json();
-    return data;
+
+    if (data.status === 0) {
+      return data.data.balance;
+    } else {
+      throw new Error(data.message);
+    }
   } catch (error) {
-    console.error(error);
+    throw new Error("Terjadi kesalahan saat mengambil saldo");
   }
 };

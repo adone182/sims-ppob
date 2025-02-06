@@ -1,14 +1,32 @@
-import Link from "../../atoms/Link";
+import { Links } from "../../atoms/Links";
 
-const NavbarLinks = () => {
+export const NavbarLinks = ({ isActive }) => {
   return (
-    <div className="hidden md:flex space-x-6">
-      {/* <Link to="/">Home</Link> */}
-      <Link to="/topup">Top Up</Link>
-      <Link to="/trancation">Transaction</Link>
-      <Link to="/account">Akun</Link>
+    <div className="hidden md:flex space-x-10">
+      <Links
+        to="/topup"
+        className={`text-md font-regular hover:text-red-500 ${isActive(
+          "/topup"
+        )}`}
+      >
+        Top Up
+      </Links>
+      <Links
+        to="/transaction"
+        className={`text-md font-regular hover:text-red-500 ${isActive(
+          "/transaction"
+        )}`}
+      >
+        Transaction
+      </Links>
+      <Links
+        to="/account"
+        className={`text-md font-regular hover:text-red-500 ${isActive(
+          "/account"
+        )}`}
+      >
+        Akun
+      </Links>
     </div>
   );
 };
-
-export default NavbarLinks;

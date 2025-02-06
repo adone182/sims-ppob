@@ -1,12 +1,11 @@
-import Logo from "../../atoms/Logo";
+import { Link } from "react-router-dom";
+import { Image } from "../../atoms/Image";
 
-const NavbarBrand = ({ imageSrc, altImg }) => {
+export const NavbarBrand = ({ to = "/", imageSrc, altImg }) => {
   return (
-    <div className="flex items-center space-x-2">
-      <Logo imageSrc={imageSrc} altImg={altImg} />
-      <span className="text-gray-700 text-xl font-semibold">SIMS PPOB</span>
-    </div>
+    <Link to={to} className="flex items-center space-x-2">
+      <Image imageSrc={imageSrc} altImg={altImg} />
+      <span className="text-gray-600 text-xl font-semibold">SIMS PPOB</span>
+    </Link>
   );
 };
-
-export default NavbarBrand;

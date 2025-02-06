@@ -1,12 +1,7 @@
-const Label = ({ title, htmlFor }) => {
+export const Label = ({ children, htmlFor }) => {
   return (
-    <label
-      htmlFor={htmlFor}
-      className="block text-slate-700 text-sm font-bold mb-3"
-    >
-      {title}
+    <label htmlFor={htmlFor} className="block text-sm text-gray-700 mb-2">
+      {children}
     </label>
   );
 };
-
-export default Label;

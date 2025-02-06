@@ -1,13 +1,13 @@
-// import Navbar from "../../organisms/Navbar";
+import { User } from "lucide-react";
+import { Navbar } from "../../organisms/Navbar";
+import { UserInfo } from "../../organisms/UserInfo";
 
-const MainLayouts = ({ children }) => {
+export const MainLayouts = ({ children }) => {
   return (
-    <main className="flex flex-col items-center justify-center h-screen bg-gray-100">
-      {/* <Navbar /> */}
-
+    <main>
+      <Navbar />
+      <UserInfo />
       {children}
     </main>
   );
 };
-
-export default MainLayouts;

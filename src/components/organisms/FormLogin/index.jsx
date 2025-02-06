@@ -1,14 +1,14 @@
 import { AtSign, LockKeyhole } from "lucide-react";
-import Button from "../../atoms/Button";
-import InputForm from "../../molecules/FormInput";
+import { Button } from "../../atoms/Button";
+import { InputForm } from "../../molecules/FormInput";
 import { useState } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../../../features/auth/authSlice";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const FormLogin = () => {
+export const FormLogin = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -56,17 +56,17 @@ const FormLogin = () => {
   return (
     <form onSubmit={handleSubmit}>
       <InputForm
-        type="email"
         name="email"
-        placehoder="masukan email anda"
+        type="email"
+        placeholder="masukkan email Anda"
         icon={<AtSign size={20} />}
         onChange={handleChange}
         value={formData.email}
       />
       <InputForm
-        type="password"
         name="password"
-        placehoder="masukan password anda"
+        type="password"
+        placeholder="masukan password anda"
         icon={<LockKeyhole size={20} />}
         onChange={handleChange}
         value={formData.password}
