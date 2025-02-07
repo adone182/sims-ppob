@@ -1,114 +1,101 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { InputForm } from "../../molecules/FormInput";
 import { AtSign, LockKeyhole, User } from "lucide-react";
 import { Button } from "../../atoms/Button";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useRegister } from "../../../hooks/CustomAuth/useRegister";
 
 export const FormRegister = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    first_name: "",
-    last_name: "",
-    password: "",
-    confirm_password: "",
-  });
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setErrorMessage(null);
-
-    if (formData.password !== formData.confirm_password) {
-      setErrorMessage("Konfirmasi password tidak cocok");
-      return;
-    }
-
-    try {
-      setIsLoading(true);
-      const baseUrl = import.meta.env.VITE_API_BASE_URL;
-      const { confirm_password, ...rest } = { ...formData };
-
-      const response = await fetch(`${baseUrl}/registration`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(rest),
-      });
-
-      const data = await response.json();
-
-      if (data.status === 0) {
-        toast.success("Registrasi berhasil, silakan login");
-        setTimeout(() => navigate("/login"), 3000);
-      } else {
-        setErrorMessage(data.message || "Terjadi kesalahan");
-        toast.error(data.message || "Terjadi kesalahan");
-      }
-    } catch (error) {
-      setErrorMessage("Gagal terhubung ke server");
-      toast.error("Gagal terhubung ke server");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const { formData, errorMessage, isLoading, handleChange, handleSubmit } =
+    useRegister();
 
   return (
     <form onSubmit={handleSubmit}>
       <InputForm
         name="email"
         type="email"
-        placeholder="masukkan email anda"
+        placeholder="Masukkan email Anda"
         icon={<AtSign size={20} />}
         onChange={handleChange}
         value={formData.email}
+        error={errorMessage.email}
       />
+      {errorMessage.email && (
+        <p className="text-red-500 text-end text-sm font-regular mt-[-12px] mb-2">
+          {errorMessage.email}
+        </p>
+      )}
+
       <InputForm
         name="first_name"
         type="text"
-        placeholder="nama depan"
+        placeholder="Nama depan"
         icon={<User size={20} />}
         onChange={handleChange}
         value={formData.first_name}
+        error={errorMessage.first_name}
       />
+      {errorMessage.first_name && (
+        <p className="text-red-500 text-end text-sm font-regular mt-[-12px] mb-2">
+          {errorMessage.first_name}
+        </p>
+      )}
+
       <InputForm
         name="last_name"
         type="text"
-        placeholder="naama belakang"
+        placeholder="Nama belakang"
         icon={<User size={20} />}
         onChange={handleChange}
         value={formData.last_name}
+        error={errorMessage.last_name}
       />
+      {errorMessage.last_name && (
+        <p className="text-red-500 text-end text-sm font-regular mt-[-12px] mb-2">
+          {errorMessage.last_name}
+        </p>
+      )}
+
       <InputForm
         name="password"
         type="password"
-        placeholder="buat password"
+        placeholder="Buat password"
         icon={<LockKeyhole size={20} />}
         onChange={handleChange}
         value={formData.password}
+        error={errorMessage.password}
       />
+      {errorMessage.password && (
+        <p className="text-red-500 text-end text-sm font-regular mt-[-12px] mb-2">
+          {errorMessage.password}
+        </p>
+      )}
+
       <InputForm
         name="confirm_password"
         type="password"
-        placeholder="konfirmasi password"
+        placeholder="Konfirmasi password"
         icon={<LockKeyhole size={20} />}
         onChange={handleChange}
         value={formData.confirm_password}
+        error={errorMessage.confirm_password}
       />
+      {errorMessage.confirm_password && (
+        <p className="text-red-500 text-end text-sm font-regular mt-[-12px] mb-2">
+          {errorMessage.confirm_password}
+        </p>
+      )}
 
-      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+      {errorMessage.general && (
+        <p className="text-red-500 text-center text-sm font-regular mt-3">
+          {errorMessage.general}
+        </p>
+      )}
 
       <Button
         type="submit"
         disabled={isLoading}
-        classname="bg-red-600 w-full text-white p-1 rounded-sm mt-3"
+        classname={`bg-red-600 w-full text-white p-1 rounded-sm mt-3 ${
+          isLoading ? "opacity-50 cursor-not-allowed" : ""
+        }`}
       >
         {isLoading ? "Loading..." : "Register"}
       </Button>

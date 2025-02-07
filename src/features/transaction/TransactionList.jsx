@@ -1,60 +1,10 @@
-import { Suspense, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getToken } from "../auth/authSlice";
+import { Suspense } from "react";
 import { CardHistory } from "../../components/organisms/CardHistory";
 import { Button } from "../../components/atoms/Button";
-import {
-  setDataTransactionList,
-  setError,
-  setLoading,
-} from "./transactionSlice";
+import { useTransactions } from "../../hooks/CustomTransactions/useTransactions";
 
 export const TransactionList = () => {
-  const [offset, setOffset] = useState(0);
-  const limit = 5;
-
-  const dispatch = useDispatch();
-  const token = useSelector(getToken);
-  const { transactions, loading } = useSelector((state) => state.transaction);
-
-  const handleShowMore = () => {
-    setOffset((prevOffset) => prevOffset + limit);
-  };
-
-  useEffect(() => {
-    const fetchTransactions = async () => {
-      dispatch(setLoading(true));
-      try {
-        const baseUrl = import.meta.env.VITE_API_BASE_URL;
-        const response = await fetch(
-          `${baseUrl}/transaction/history?offset=${offset}&limit=${limit}`,
-          {
-            method: "GET",
-            headers: {
-              Accept: "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        const result = await response.json();
-
-        if (result.status === 0 && result.data?.records) {
-          console.log("user transaction ===>", result.data.records);
-          dispatch(
-            setDataTransactionList([...transactions, ...result.data.records])
-          );
-        } else {
-          throw new Error("Failed to fetch transactions");
-        }
-      } catch (error) {
-        dispatch(setError(error.message));
-      } finally {
-        dispatch(setLoading(false));
-      }
-    };
-
-    fetchTransactions();
-  }, [dispatch, token, offset]);
+  const { transactions, loading, handleShowMore } = useTransactions();
 
   return (
     <div className="px-20 pt-10">

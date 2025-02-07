@@ -27,8 +27,14 @@ function App() {
           path="/"
           element={isAunthenticated ? <Home /> : <Navigate to="/login" />}
         />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route
+          path="/login"
+          element={!isAunthenticated ? <Login /> : <Home />}
+        />
+        <Route
+          path="/register"
+          element={!isAunthenticated ? <Register /> : <Home />}
+        />
         <Route
           path="/topup"
           element={isAunthenticated ? <TopUp /> : <Navigate to="/login" />}
